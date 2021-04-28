@@ -1,0 +1,22 @@
+{
+  "name": "@matthewwei35/weather_api_lib",
+  "version": "1.0.0",
+  "description": "This repo contains some starter code that works with the [Open Weather Map API](https://openweathermap.org).",
+  "main": "getWeather.js",
+  "dependencies": {
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/matthewwei35/FEW-2.1_Weather_API.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/matthewwei35/FEW-2.1_Weather_API/issues"
+  },
+  "homepage": "https://github.com/matthewwei35/FEW-2.1_Weather_API#readme"
+}
