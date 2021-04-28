@@ -109,68 +109,68 @@
     <script type="module">
       // ------------------------------------------------------
       // Developer Code
-      import { getWeatherByZip, getWeatherByCity, getWeatherByGeo } from './getWeather.js'
+      import { getWeatherByZip, getWeatherByCity, getWeatherByGeo } from './getWeather.js';
 
       // Get Element refererences
-      const nameEl = document.getElementById('name')
-      const tempEl = document.getElementById('temp')
-      const descEl = document.getElementById('desc')
+      const nameEl = document.getElementById('name');
+      const tempEl = document.getElementById('temp');
+      const descEl = document.getElementById('desc');
 
-      const zipFormEl = document.getElementById('zipForm')
-      const zipInput = document.getElementById('zip')
+      const zipFormEl = document.getElementById('zipForm');
+      const zipInput = document.getElementById('zip');
 
-      const cityFormEl = document.getElementById('cityForm')
-      const cityInput = document.getElementById('city')
+      const cityFormEl = document.getElementById('cityForm');
+      const cityInput = document.getElementById('city');
 
-      const geoFormEl = document.getElementById('geoForm')
-      const latInput = document.getElementById('lat')
-      const lonInput = document.getElementById('lon')
+      const geoFormEl = document.getElementById('geoForm');
+      const latInput = document.getElementById('lat');
+      const lonInput = document.getElementById('lon');
 
-      const unitInput = document.getElementById('unit')
+      const unitInput = document.getElementById('unit');
 
       function myDisplayer({name, temp, desc}) {
-        nameEl.innerHTML = name
-        tempEl.innerHTML = temp
-        descEl.innerHTML = desc
+        nameEl.innerHTML = name;
+        tempEl.innerHTML = temp;
+        descEl.innerHTML = desc;
       }
 
       function configureUnit(unit) {
         if (unit === 'Fahrenheit') {
-          return 'imperial'
+          return 'imperial';
         } else if (unit === 'Celcius') {
-          return 'metric'
+          return 'metric';
         }
       }
 
       // Define event listeners
       zipFormEl.addEventListener('submit', async (e) => {
-        e.preventDefault()
-        const zip = zipInput.value
+        e.preventDefault();
+        const zip = zipInput.value;
         // let unit = unitInput.value
-        const unit = configureUnit(unitInput.value)
+        const unit = configureUnit(unitInput.value);
         // getWeather('apiToken', zip, myDisplayer)
         // getWeather('apiToken', zip).then((data) => {
         //   myDisplayer(data)
         // })
-        const data = await getWeatherByZip(zip, apiToken, unit)
-        myDisplayer(data)
+        const data = await getWeatherByZip(zip, apiToken, unit);
+        myDisplayer(data);
       })
 
       cityFormEl.addEventListener('submit', async (e) => {
-        e.preventDefault()
-        const city = cityInput.value
-        const unit = configureUnit(unitInput.value)
-        const data = await getWeatherByCity(city, apiToken, unit)
-        myDisplayer(data)
+        e.preventDefault();
+        const city = cityInput.value;
+        const unit = configureUnit(unitInput.value);
+        const data = await getWeatherByCity(city, apiToken, unit);
+        myDisplayer(data);
       })
 
       geoFormEl.addEventListener('submit', async (e) => {
-        e.preventDefault()
-        const latitude = latInput.value
-        const longitude = lonInput.value
-        const unit = configureUnit(unitInput.value)
-        const data = await getWeatherByGeo(latitude, longitude, apiToken, unit)
-        myDisplayer(data)
+        e.preventDefault();
+        const latitude = latInput.value;
+        const longitude = lonInput.value;
+        const unit = configureUnit(unitInput.value);
+        const data = await getWeatherByGeo(latitude, longitude, apiToken, unit);
+        myDisplayer(data);
       })
 
     </script>

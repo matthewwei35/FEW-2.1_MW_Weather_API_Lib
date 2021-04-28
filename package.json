@@ -3,9 +3,12 @@
   "version": "1.0.0",
   "description": "This repo contains some starter code that works with the [Open Weather Map API](https://openweathermap.org).",
   "main": "getWeather.js",
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^7.25.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1"
   },
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
