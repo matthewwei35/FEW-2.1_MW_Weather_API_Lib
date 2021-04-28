@@ -27,11 +27,11 @@
         border: 1px
       }
 
-      #form {
+      .form {
         display: flex;
       }
 
-      #form > input {
+      .form > input {
         flex: 1;
         padding: 1em;
         font-size: 1em;
@@ -41,7 +41,7 @@
         border-right: none;
       }
 
-      #form > button {
+      .form > button {
         padding: 0 1em;
         background-color: rgb(106, 177, 238);
         color: #fff;
@@ -65,20 +65,45 @@
       <p id="desc">
         <!-- description -->
       </p>
-      <form id="form">
+      <select id="unit" name="unit">
+        <option id="imperial">Fahrenheit</option>
+        <option id="metric">Celcius</option>
+      </select>
+      <form class="form" id="zipForm">
         <input 
           id="zip" 
           type="number" 
           placeholder="zip code"
-          title="Please Enter a valid Zip Code"
+          title="Please Enter a Valid Zip Code"
           pattern="^\d{5}(?:[-\s]\d{4})?$"
         >
-        <select id="unit" name="unit">
-          <option id="imperial">Fahrenheit</option>
-          <option id="metric">Celcius</option>
-        </select>
         <button type="submit">Search</button>
       </form>
+      <form class="form" id="cityForm">
+        <input 
+          id="city" 
+          type="text" 
+          placeholder="city name"
+          title="Please Enter a City Name"
+        >
+        <button type="submit">Search</button>
+      </form>
+      <form class="form" id="geoForm">
+        <input 
+          id="lat" 
+          type="number"
+          step="0.000000000000001"
+          placeholder="latitude"
+          title="Please Enter a Valid Latitude"
+        >
+        <input 
+          id="lon" 
+          type="number" 
+          step="0.000000000000001"
+          placeholder="longitude"
+          title="Please Enter a Valid Longitude"
+        >
+        <button type="submit">Search</button>
     </div>
 
     <script type="module">
@@ -90,8 +115,17 @@
       const nameEl = document.getElementById('name')
       const tempEl = document.getElementById('temp')
       const descEl = document.getElementById('desc')
-      const formEl = document.getElementById('form')
+
+      const zipFormEl = document.getElementById('zipForm')
       const zipInput = document.getElementById('zip')
+
+      const cityFormEl = document.getElementById('cityForm')
+      const cityInput = document.getElementById('city')
+
+      const geoFormEl = document.getElementById('geoForm')
+      const latInput = document.getElementById('lat')
+      const lonInput = document.getElementById('lon')
+
       const unitInput = document.getElementById('unit')
 
       function myDisplayer({name, temp, desc}) {
@@ -100,21 +134,42 @@
         descEl.innerHTML = desc
       }
 
+      function configureUnit(unit) {
+        if (unit === 'Fahrenheit') {
+          return 'imperial'
+        } else if (unit === 'Celcius') {
+          return 'metric'
+        }
+      }
+
       // Define event listeners
-      formEl.addEventListener('submit', async (e) => {
+      zipFormEl.addEventListener('submit', async (e) => {
         e.preventDefault()
         const zip = zipInput.value
-        let unit = unitInput.value
-        if (unit === 'Fahrenheit') {
-          unit = 'imperial'
-        } else if (unit === 'Celcius') {
-          unit = 'metric'
-        }
+        // let unit = unitInput.value
+        const unit = configureUnit(unitInput.value)
         // getWeather('apiToken', zip, myDisplayer)
         // getWeather('apiToken', zip).then((data) => {
         //   myDisplayer(data)
         // })
         const data = await getWeatherByZip(zip, apiToken, unit)
+        myDisplayer(data)
+      })
+
+      cityFormEl.addEventListener('submit', async (e) => {
+        e.preventDefault()
+        const city = cityInput.value
+        const unit = configureUnit(unitInput.value)
+        const data = await getWeatherByCity(city, apiToken, unit)
+        myDisplayer(data)
+      })
+
+      geoFormEl.addEventListener('submit', async (e) => {
+        e.preventDefault()
+        const latitude = latInput.value
+        const longitude = lonInput.value
+        const unit = configureUnit(unitInput.value)
+        const data = await getWeatherByGeo(latitude, longitude, apiToken, unit)
         myDisplayer(data)
       })
 

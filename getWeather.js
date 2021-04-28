@@ -14,7 +14,7 @@ function getWeatherByZip(zip, apiKey, units) {
 }
 
 function getWeatherByCity(city, apiKey, units) {
-  const path = `https://api.openweathermap.org/data/2.5/weather?zip=${city}&appid=${apiKey}&units=${units}`
+  const path = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${units}`
   return getWeather(path)
 }
 
